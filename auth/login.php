@@ -13,7 +13,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 if (!$data) {
     echo json_encode([
         "status" => false,
-        "message" => "잘못된 요청입니다."
+        "message" => "잘못된 요청입니다222."
     ]);
     exit;
 }
