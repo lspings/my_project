@@ -5,7 +5,7 @@ require __DIR__ . '/vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-echo "www-2"; 
+echo "www-3"; 
 
 $key = str_repeat("a", 64);
 
