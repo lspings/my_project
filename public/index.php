@@ -2,6 +2,7 @@
 
 session_start();
 
+
 if (!isset($_SESSION['user'])) {
 
     header("Location: login.php");
@@ -9,23 +10,32 @@ if (!isset($_SESSION['user'])) {
 
 }
 
-$user = $_SESSION['user'];
+
+
+$pageTitle = "Dashboard";
+
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ko">
 
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>My Project Dashboard</title>
 
+
 <link rel="stylesheet" href="assets/css/style.css">
 
+
 </head>
+
 
 
 <body class="dashboard-page">
@@ -36,166 +46,166 @@ $user = $_SESSION['user'];
 
 
 
-    <!-- Sidebar -->
+<?php
 
+require_once "layout/sidebar.php";
 
-    <aside class="sidebar">
+?>
 
 
-        <div class="brand">
 
-            <span>MY</span> PROJECT
 
-        </div>
 
+<div class="dashboard-main">
 
 
 
-        <nav class="sidebar-menu">
+<?php
 
+require_once "layout/header.php";
 
-            <a href="#" class="active">
+?>
 
-                🏠 Dashboard
 
-            </a>
 
 
-            <a href="#">
 
-                👥 회원 관리
+<main class="dashboard-content">
 
-            </a>
 
 
-            <a href="#">
 
-                📝 게시판
 
-            </a>
+<section class="welcome-box">
 
 
-            <a href="#">
+<h1>
 
-                📊 통계
+안녕하세요 <?= htmlspecialchars($_SESSION['user']['username']) ?>님 👋
 
-            </a>
+</h1>
 
 
-            <a href="#">
+<p>
 
-                ⚙ 설정
+My Project 관리자 페이지입니다.
 
-            </a>
+</p>
 
 
+</section>
 
-        </nav>
 
 
 
-    </aside>
 
 
 
+<section class="stat-area">
 
 
 
 
-    <!-- Main -->
 
+<div class="stat-card">
 
-    <div class="dashboard-main">
 
+<div class="stat-icon">
 
+👥
 
+</div>
 
 
-        <header class="dashboard-header">
+<div>
 
+<span>
+전체 회원
+</span>
 
-            <div>
 
-                <h2>
-                    Dashboard
-                </h2>
+<strong>
+1,250
+</strong>
 
 
-                <p>
-                    서비스 현황을 확인하세요.
-                </p>
+</div>
 
 
-            </div>
+</div>
 
 
 
 
 
 
-            <div class="user-profile">
 
+<div class="stat-card">
 
-                <div class="user-info">
 
+<div class="stat-icon">
 
-                    <strong>
-                    <?= htmlspecialchars($user['username']) ?>
-                    </strong>
+📝
 
+</div>
 
-                    <small>
-                    Administrator
-                    </small>
 
+<div>
 
-                </div>
+<span>
+게시글
+</span>
 
 
+<strong>
+856
+</strong>
 
 
-                <a href="logout.php">
+</div>
 
-                    로그아웃
 
-                </a>
+</div>
 
 
 
-            </div>
 
 
 
 
-        </header>
+<div class="stat-card">
 
 
+<div class="stat-icon">
 
+👀
 
+</div>
 
 
+<div>
 
+<span>
+오늘 방문
+</span>
 
-        <main class="dashboard-content">
 
+<strong>
+324
+</strong>
 
 
+</div>
 
 
-            <section class="welcome-box">
+</div>
 
 
-                <h1>
-                    안녕하세요 <?= htmlspecialchars($user['username']) ?>님 👋
-                </h1>
 
 
-                <p>
-                    My Project 관리자 페이지입니다.
-                </p>
 
 
-            </section>
+</section>
 
 
 
@@ -204,229 +214,115 @@ $user = $_SESSION['user'];
 
 
 
-            <!-- Statistics -->
 
+<section class="dashboard-grid">
 
-            <section class="stat-area">
 
 
 
-                <div class="stat-card">
 
+<div class="dashboard-panel">
 
-                    <div class="stat-icon">
-                        👥
-                    </div>
 
+<h3>
+최근 활동
+</h3>
 
-                    <div>
 
-                        <span>
-                        전체 회원
-                        </span>
+<ul>
 
 
-                        <strong>
-                        1,250
-                        </strong>
+<li>
 
+로그인 시스템 구축
 
-                    </div>
+<span>
+Today
+</span>
 
+</li>
 
-                </div>
 
 
+<li>
 
+회원 관리 기능 준비
 
+<span>
+Yesterday
+</span>
 
-                <div class="stat-card">
+</li>
 
 
-                    <div class="stat-icon">
-                        📝
-                    </div>
 
+<li>
 
-                    <div>
+프로젝트 구조 개선
 
-                        <span>
-                        게시글
-                        </span>
+<span>
+3 Days ago
+</span>
 
+</li>
 
-                        <strong>
-                        856
-                        </strong>
 
+</ul>
 
-                    </div>
 
+</div>
 
-                </div>
 
 
 
 
 
 
-                <div class="stat-card">
 
+<div class="dashboard-panel">
 
-                    <div class="stat-icon">
-                        👀
-                    </div>
 
+<h3>
+빠른 메뉴
+</h3>
 
-                    <div>
 
-                        <span>
-                        오늘 방문
-                        </span>
+<div class="quick-menu">
 
 
-                        <strong>
-                        324
-                        </strong>
+<button>
+회원 관리
+</button>
 
 
-                    </div>
+<button>
+게시판 관리
+</button>
 
 
-                </div>
+<button>
+시스템 설정
+</button>
 
 
+</div>
 
 
-            </section>
+</div>
 
 
 
 
 
+</section>
 
 
 
 
 
-            <section class="dashboard-grid">
 
+</main>
 
-
-
-
-                <div class="dashboard-panel">
-
-
-                    <h3>
-                        최근 활동
-                    </h3>
-
-
-                    <ul>
-
-
-                        <li>
-
-                            로그인 시스템 구축
-
-                            <span>
-                            Today
-                            </span>
-
-                        </li>
-
-
-
-                        <li>
-
-                            회원 관리 기능 준비
-
-                            <span>
-                            Yesterday
-                            </span>
-
-                        </li>
-
-
-
-                        <li>
-
-                            프로젝트 구조 개선
-
-                            <span>
-                            3 Days ago
-                            </span>
-
-                        </li>
-
-
-
-                    </ul>
-
-
-
-                </div>
-
-
-
-
-
-
-
-                <div class="dashboard-panel">
-
-
-                    <h3>
-                        빠른 메뉴
-                    </h3>
-
-
-
-                    <div class="quick-menu">
-
-
-                        <button>
-                            회원 관리
-                        </button>
-
-
-                        <button>
-                            게시판 관리
-                        </button>
-
-
-                        <button>
-                            시스템 설정
-                        </button>
-
-
-
-                    </div>
-
-
-
-                </div>
-
-
-
-
-
-            </section>
-
-
-
-
-
-
-
-        </main>
-
-
-
-
-
-    </div>
 
 
 
@@ -437,6 +333,13 @@ $user = $_SESSION['user'];
 
 
 
-</body>
+</div>
 
-</html>
+
+
+
+<?php
+
+require_once "layout/footer.php";
+
+?>
