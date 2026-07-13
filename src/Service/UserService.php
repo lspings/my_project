@@ -66,4 +66,31 @@ class UserService
         return $this->userRepository->delete($id);
     }
 
+
+
+    // 회원 검색
+    public function searchUsers(string $keyword, int $page = 1, int $limit = 10): array
+    {
+        $offset = ($page - 1) * $limit;
+
+
+        return [
+            'users' => $this->userRepository->search(
+                $keyword,
+                $offset,
+                $limit
+            ),
+
+            'total' => $this->userRepository->searchCount(
+                $keyword
+            ),
+
+            'page' => $page,
+
+            'limit' => $limit,
+
+            'keyword' => $keyword
+        ];
+    }
+
 }

@@ -139,4 +139,79 @@ class UserRepository
         ]);
     }
 
+
+    // 회원 검색
+    public function search(string $keyword, int $offset, int $limit)
+    {
+        $sql = "
+            SELECT
+                id,
+                username,
+                email,
+                created_at
+            FROM users
+            WHERE username LIKE :keyword
+            OR email LIKE :keyword
+            ORDER BY id DESC
+            LIMIT :offset, :limit
+        ";
+
+
+        $stmt = $this->db->prepare($sql);
+
+
+        $keyword = "%" . $keyword . "%";
+
+
+        $stmt->bindValue(
+            ':keyword',
+            $keyword,
+            PDO::PARAM_STR
+        );
+
+
+        $stmt->bindValue(
+            ':offset',
+            $offset,
+            PDO::PARAM_INT
+        );
+
+
+        $stmt->bindValue(
+            ':limit',
+            $limit,
+            PDO::PARAM_INT
+        );
+
+
+        $stmt->execute();
+
+
+        return $stmt->fetchAll();
+    }
+
+
+
+    // 검색 회원 수
+    public function searchCount(string $keyword)
+    {
+        $sql = "
+            SELECT COUNT(*)
+            FROM users
+            WHERE username LIKE :keyword
+            OR email LIKE :keyword
+        ";
+
+
+        $stmt = $this->db->prepare($sql);
+
+
+        $stmt->execute([
+            ':keyword' => "%" . $keyword . "%"
+        ]);
+
+
+        return (int)$stmt->fetchColumn();
+    }
+
 }
