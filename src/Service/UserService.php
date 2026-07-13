@@ -45,4 +45,25 @@ class UserService
             )
         ]);
     }
+
+
+    // 회원 조회
+    public function getUser(int $id)
+    {
+        return $this->userRepository->findById($id);
+    }
+
+    // 회원 수정
+    public function updateUser(int $id, array $data)
+    {
+        return $this->userRepository->update($id,$data);
+    }
+
+
+    // 회원 삭제
+    public function deleteUser(int $id)
+    {
+        return $this->userRepository->delete($id);
+    }
+
 }

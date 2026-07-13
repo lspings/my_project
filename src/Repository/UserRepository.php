@@ -94,5 +94,49 @@ class UserRepository
         ]);
     }
 
+    // 회원 조회
+    public function findById(int $id)
+    {
+        $sql = "SELECT * FROM users WHERE id = :id";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':id' => $id
+        ]);
+
+        return $stmt->fetch();
+    }
+
+    // 회원 정보 수정
+    public function update(int $id, array $data)
+    {
+        $sql = "
+            UPDATE users
+            SET 
+                username = :username,
+                email = :email
+            WHERE id = :id
+        ";
+
+        $stmt = $this->db->prepare($sql);
+
+        return $stmt->execute([
+            ':username' => $data['username'],
+            ':email' => $data['email'],
+            ':id' => $id
+        ]);
+    }
+
+    // 회원 삭제
+    public function delete(int $id)
+    {
+        $sql = "DELETE FROM users WHERE id = :id";
+
+        $stmt = $this->db->prepare($sql);
+
+        return $stmt->execute([
+            ':id'=>$id
+        ]);
+    }
 
 }
